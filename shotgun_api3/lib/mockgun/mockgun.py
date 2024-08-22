@@ -305,7 +305,11 @@ class Shotgun(object):
                 else:
                     raise ValueError("Unknown ordering direction")
 
-                results = sorted(results, key=lambda k: k[order_field], reverse=desc_order)
+                results = sorted(
+                    results,
+                    key=lambda k: k[order_field] if k[order_field] is not None else "",
+                    reverse=desc_order,
+                )
 
         if fields is None:
             fields = set(["type", "id"])
